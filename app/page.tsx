@@ -13,6 +13,9 @@ type PropsType = {
   style: any;
 };
 
+let unsedVar;
+let myString = "aaa";
+
 // define a function to render the list
 function renderData({ index, style }: PropsType) {
   console.log("in renderData fnc, index, style: ", index, style);
