@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { FixedSizeList as List } from "react-window";
 
 // create a long array
@@ -13,7 +14,8 @@ type PropsType = {
   style: any;
 };
 
-let unsedVar;
+// this unused variables are created to test and try linting features. Will be deleted later.
+let unUsedVar;
 let myString = "aaa";
 
 // define a function to render the list
@@ -26,6 +28,7 @@ function renderData({ index, style }: PropsType) {
         display: "flex",
         alignItems: "center",
         borderBottom: "1px solid lightgrey",
+        marginLeft: "20px",
       }}
     >
       {index} - {data[index]}
@@ -36,27 +39,36 @@ function renderData({ index, style }: PropsType) {
 export default function UseReactWindow() {
   console.log("created data: ", data);
 
+  const [divHeight, setDivHeight] = useState<number>(500);
+  const [divHeightTxt, setDivHeightTxt] = useState<string>("500px");
+
+  let style = divHeightTxt;
   return (
-    <div
-      style={{
-        height: "400px",
-        width: "800px",
-        border: "1px solid lightgrey",
-      }}
-    >
-      <p>
+    <div>
+      <p className="mx-2 my-[30px]">
         This study project covers List Virtualization with the usage of
         React-Window package.
       </p>
-      <List
-        className=""
-        height={500}
-        itemCount={data.length}
-        itemSize={35}
-        width={250}
+      <div
+        style={{
+          height: divHeight,
+          width: "800px",
+          border: "1px solid lightgrey",
+          color: "red",
+        }}
+        // another way to define styling is tailwindCSS:
+        // className="h-[divHeightTxt], w-[800px], border border-[1px] "
       >
-        {renderData}
-      </List>
+        <List
+          className=""
+          height={divHeight}
+          itemCount={data.length}
+          itemSize={35}
+          width={190}
+        >
+          {renderData}
+        </List>
+      </div>
     </div>
   );
 }
